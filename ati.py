@@ -82,115 +82,115 @@
 # if __name__ == "__main__":
 #     main()
 
-# import json
+import json
 
-# # Constants
-# INVENTORY_FILE = "library_inventory.json"
+# Constants
+INVENTORY_FILE = "library_inventory.json"
 
-# # Function to load library inventory from file
-# def load_inventory():
-#     try:
-#         with open(INVENTORY_FILE, "r") as file:
-#             return json.load(file)
-#     except FileNotFoundError:
-#         return {}
+# Function to load library inventory from file
+def load_inventory():
+    try:
+        with open(INVENTORY_FILE, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
-# # Function to save library inventory to file
-# def save_inventory(inventory):
-#     with open(INVENTORY_FILE, "w") as file:
-#         json.dump(inventory, file)
+# Function to save library inventory to file
+def save_inventory(inventory):
+    with open(INVENTORY_FILE, "w") as file:
+        json.dump(inventory, file)
 
-# # Function to add a book to the library inventory
-# def add_book(inventory, book_id, title, author):
-#     inventory[book_id] = {"title": title, "author": author, "available": True}
+# Function to add a book to the library inventory
+def add_book(inventory, book_id, title, author):
+    inventory[book_id] = {"title": title, "author": author, "available": True}
 
-# # Function to search for a book in the library inventory
-# def search_book(inventory, title):
-#     for book_id, details in inventory.items():
-#         if details["title"].lower() == title.lower():
-#             return book_id, details
-#     return None, None
+# Function to search for a book in the library inventory
+def search_book(inventory, title):
+    for book_id, details in inventory.items():
+        if details["title"].lower() == title.lower():
+            return book_id, details
+    return None, None
 
-# # Function to borrow a book from the library inventory
-# def borrow_book(inventory, book_id):
-#     if book_id in inventory and inventory[book_id]["available"]:
-#         inventory[book_id]["available"] = False
-#         return True
-#     return False
+# Function to borrow a book from the library inventory
+def borrow_book(inventory, book_id):
+    if book_id in inventory and inventory[book_id]["available"]:
+        inventory[book_id]["available"] = False
+        return True
+    return False
 
-# # Function to return a book to the library inventory
-# def return_book(inventory, book_id):
-#     if book_id in inventory and not inventory[book_id]["available"]:
-#         inventory[book_id]["available"] = True
-#         return True
-#     return False
+# Function to return a book to the library inventory
+def return_book(inventory, book_id):
+    if book_id in inventory and not inventory[book_id]["available"]:
+        inventory[book_id]["available"] = True
+        return True
+    return False
 
-# # Function to remove a book from the library inventory
-# def remove_book(inventory, book_id):
-#     if book_id in inventory:
-#         del inventory[book_id]
+# Function to remove a book from the library inventory
+def remove_book(inventory, book_id):
+    if book_id in inventory:
+        del inventory[book_id]
 
-# # Main function to run the library system
-# def main():
-#     # Load library inventory from file
-#     inventory = load_inventory()
+# Main function to run the library system
+def main():
+    # Load library inventory from file
+    inventory = load_inventory()
 
-#     while True:
-#         print("\nLibrary Management System")
-#         print("1. Add Book")
-#         print("2. Search Book")
-#         print("3. Borrow Book")
-#         print("4. Return Book")
-#         print("5. Remove Book")
-#         print("6. Exit")
+    while True:
+        print("\nLibrary Management System")
+        print("1. Add Book")
+        print("2. Search Book")
+        print("3. Borrow Book")
+        print("4. Return Book")
+        print("5. Remove Book")
+        print("6. Exit")
 
-#         choice = input("Enter your choice: ")
+        choice = input("Enter your choice: ")
 
-#         if choice == "1":
-#             book_id = input("Enter book ID: ")
-#             title = input("Enter book title: ")
-#             author = input("Enter author name: ")
-#             add_book(inventory, book_id, title, author)
-#             save_inventory(inventory)
-#             print("Book added successfully.")
+        if choice == "1":
+            book_id = input("Enter book ID: ")
+            title = input("Enter book title: ")
+            author = input("Enter author name: ")
+            add_book(inventory, book_id, title, author)
+            save_inventory(inventory)
+            print("Book added successfully.")
 
-#         elif choice == "2":
-#             title = input("Enter book title to search: ")
-#             book_id, details = search_book(inventory, title)
-#             if book_id:
-#                 print(f"Book found - ID: {book_id}, Title: {details['title']}, Author: {details['author']}, Available: {'Yes' if details['available'] else 'No'}")
-#             else:
-#                 print("Book not found.")
+        elif choice == "2":
+            title = input("Enter book title to search: ")
+            book_id, details = search_book(inventory, title)
+            if book_id:
+                print(f"Book found - ID: {book_id}, Title: {details['title']}, Author: {details['author']}, Available: {'Yes' if details['available'] else 'No'}")
+            else:
+                print("Book not found.")
 
-#         elif choice == "3":
-#             book_id = input("Enter book ID to borrow: ")
-#             if borrow_book(inventory, book_id):
-#                 save_inventory(inventory)
-#                 print("Book borrowed successfully.")
-#             else:
-#                 print("Book not available or does not exist.")
+        elif choice == "3":
+            book_id = input("Enter book ID to borrow: ")
+            if borrow_book(inventory, book_id):
+                save_inventory(inventory)
+                print("Book borrowed successfully.")
+            else:
+                print("Book not available or does not exist.")
 
-#         elif choice == "4":
-#             book_id = input("Enter book ID to return: ")
-#             if return_book(inventory, book_id):
-#                 save_inventory(inventory)
-#                 print("Book returned successfully.")
-#             else:
-#                 print("Book not borrowed or does not exist.")
+        elif choice == "4":
+            book_id = input("Enter book ID to return: ")
+            if return_book(inventory, book_id):
+                save_inventory(inventory)
+                print("Book returned successfully.")
+            else:
+                print("Book not borrowed or does not exist.")
 
-#         elif choice == "5":
-#             book_id = input("Enter book ID to remove: ")
-#             remove_book(inventory, book_id)
-#             save_inventory(inventory)
-#             print("Book removed successfully.")
+        elif choice == "5":
+            book_id = input("Enter book ID to remove: ")
+            remove_book(inventory, book_id)
+            save_inventory(inventory)
+            print("Book removed successfully.")
 
-#         elif choice == "6":
-#             print("Exiting...")
-#             break
+        elif choice == "6":
+            print("Exiting...")
+            break
 
-#         else:
-#             print("Invalid choice. Please try again.")
+        else:
+            print("Invalid choice. Please try again.")
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 

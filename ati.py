@@ -4,3 +4,4 @@ import googletrans
 import textblob
 
 root = Tk()
+root.geometry("700x400")

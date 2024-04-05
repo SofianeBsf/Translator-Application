@@ -10,3 +10,8 @@ root.geometry('880x300')
 
 original_text = Text(root, height=10, width=40)
 original_text.grid(row=0, column=0, padx=10, pady=20)
+
+translate_button = Button(root, text="TRANSLATE!", font=("Arial", 24), command=translate)
+
+translated_text = Text(root, height=10, width=40)
+translated_text.grid(row=0, column=2, padx=10, pady=20)

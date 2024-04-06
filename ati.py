@@ -22,13 +22,13 @@ languages = googletrans.LANGUAGES
 language_list = list(languages.values())
 
 # text boxes
-original_text = Text(root, height=10, width=40)
+original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)
 
 translate_button = Button(root, text="TRANSLATE!", font=("Arial", 24), command=translate)
 translate_button.grid(row=0, column=1, padx=10)
 
-translated_text = Text(root, height=10, width=40)
+translated_text = Text(root, height=10, width=40, font=("Arial", 11))
 translated_text.grid(row=0, column=2, padx=10, pady=20)
 
 #combo boxes

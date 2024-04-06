@@ -10,6 +10,25 @@ root = Tk()
 root.title('Translator')  # Set the title of the window
 root.geometry('880x300')  # Set the initial size of the window
 
+# Define a colorful theme
+root.configure(bg="#2C3E50")  # Set background color of the main window
+
+# Function to set style for all widgets
+def set_style():
+    style = ttk.Style()
+
+    # Configure buttons
+    style.configure('TButton', foreground='#0000', background='#3498db', font=('Arial', 12), padding=10)
+
+    # Configure combo boxes
+    style.configure('TCombobox', foreground='#0000', background='#34495e', font=('Arial', 11), fieldbackground='#34495e')
+
+    # Configure text widgets
+    style.configure('TText', foreground='#0000', background='#34495e', font=('Arial', 11))
+
+# Call the function to set style
+set_style()
+
 # Define function to perform translation
 def translate_it():
     translated_text.delete(1.0, END)  # Clear the translated text box

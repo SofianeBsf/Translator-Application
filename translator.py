@@ -94,11 +94,11 @@ translated_text.grid(row=0, column=2, padx=10, pady=20)
 
 # Create the combo boxes for selecting languages
 original_combo = ttk.Combobox(root, width=50, value=language_list)
-original_combo.current(21)  # Set the default selection for original language
+original_combo.current(21)  # Set the default selection for original language 'english'
 original_combo.grid(row=1, column=0)
 
 translated_combo = ttk.Combobox(root, width=50, value=language_list)
-translated_combo.current(26)  # Set the default selection for target language
+translated_combo.current(26)  # Set the default selection for target language 'french'
 translated_combo.grid(row=1, column=2)
 
 # Create a switch button

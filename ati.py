@@ -16,6 +16,8 @@ def clear():
     original_text.delete(1.0, END)
     translated_text.delete(1.0, END)
 
+# exemple of a language list
+language_list = (1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,16,15,17,18,19,20,21,22,23,24,25, 26,27,28,29,30)
 
 # text boxes
 original_text = Text(root, height=10, width=40)
@@ -34,7 +36,7 @@ original_combo.grid(row=1, column=0)
 
 translated_combo = ttk.Combobox(root, width=50, value=language_list)
 translated_combo.current(26)
-translated_combo.grid(row=2, column=0)
+translated_combo.grid(row=1, column=2)
 
 # clear button
 clear_button = Button(root, text="clear", command=clear)

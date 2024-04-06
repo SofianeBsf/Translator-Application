@@ -82,7 +82,7 @@ switch_button = Button(root, text="SWITCH", command=switch_languages)
 switch_button.grid(row=1, column=1)
 
 # Create the clear button
-clear_button = Button(root, text="clear", command=clear)
+clear_button = Button(root, text="CLEAR", command=clear)
 clear_button.grid(row=2, column=1)
 
 # Start the Tkinter event loop

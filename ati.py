@@ -45,6 +45,13 @@ def clear():
     original_text.delete(1.0, END)
     translated_text.delete(1.0, END)
 
+# Function to switch between original and translated languages
+def switch_languages():
+    original_lang = original_combo.get()
+    translated_lang = translated_combo.get()
+    original_combo.set(translated_lang)
+    translated_combo.set(original_lang)
+
 # Get the list of languages available for translation
 languages = googletrans.LANGUAGES
 language_list = list(languages.values())
@@ -69,6 +76,10 @@ original_combo.grid(row=1, column=0)
 translated_combo = ttk.Combobox(root, width=50, value=language_list)
 translated_combo.current(26)  # Set the default selection for target language
 translated_combo.grid(row=1, column=2)
+
+# Create a switch button
+switch_button = Button(root, text="SWITCH", command=switch_languages)
+switch_button.grid(row=1, column=1)
 
 # Create the clear button
 clear_button = Button(root, text="clear", command=clear)

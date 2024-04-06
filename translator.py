@@ -37,6 +37,11 @@ def translate_it():
         to_lang = translated_combo.get()  # Get the selected target language
         input_text = textblob.TextBlob(original_text.get(1.0, END).strip())  # Get the input text
         
+        # Ensure input text is not empty
+        if not input_text:
+            messagebox.showwarning("Translator", "Please enter text to translate.")
+            return
+
         # Create a translator object
         translator = googletrans.Translator()
         # Translate the input text from the original language to the target language

@@ -13,6 +13,19 @@ root.geometry('880x300')  # Set the initial size of the window
 # Define a colorful theme
 root.configure(bg="#88BEFF")  # Set background color of the main window
 
+# Get the list of languages available for translation
+languages = googletrans.LANGUAGES
+language_list = list(languages.values())
+
+# Creating a function to sort the languages list alphabetically
+# I used here a bubble sorting
+def languages_list_sorting(lst):
+    n = len(lst)
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+
 # Function to set style for all widgets
 def set_style():
     style = ttk.Style()
@@ -25,6 +38,9 @@ def set_style():
 
     # Configure text widgets
     style.configure('TText', foreground='#0000', background='#34495e', font=('Arial', 11))
+
+    # Sort languages alphabetically for combo boxes
+    languages_list_sorting(language_list)
 
 # Call the function to set style
 set_style()
@@ -75,10 +91,6 @@ def switch_languages():
     translated_lang = translated_combo.get()
     original_combo.set(translated_lang)
     translated_combo.set(original_lang)
-
-# Get the list of languages available for translation
-languages = googletrans.LANGUAGES
-language_list = list(languages.values())
 
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))

@@ -16,8 +16,10 @@ def clear():
     original_text.delete(1.0, END)
     translated_text.delete(1.0, END)
 
-# exemple of a language list
-language_list = (1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,16,15,17,18,19,20,21,22,23,24,25, 26,27,28,29,30)
+# grab languages list from googletrans
+languages = googletrans.LANGUAGES
+
+language_list = list(languages.values())
 
 # text boxes
 original_text = Text(root, height=10, width=40)

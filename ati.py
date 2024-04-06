@@ -25,6 +25,16 @@ def translate_it():
         
         # Insert the translated text into the text box
         translated_text.insert(1.0, translation.text)
+
+        # Initialize the speech engine
+        engine = pyttsx3.init()
+
+        # Pass text to speech engin
+        engine.say(translation)
+
+        # Run the engine
+        engine.runAndWait()
+
     except Exception as e:
         # Display an error message if translation fails
         messagebox.showerror("Translator", f"Translation failed. Error: {e}")

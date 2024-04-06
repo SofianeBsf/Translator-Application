@@ -1,38 +1,27 @@
 from tkinter import *
 import googletrans
 import textblob
+from translate import Translator
 from tkinter import ttk, messagebox
 
 root = Tk()
 root.title('Translator')
-# root.iconbitmap('#')
 root.geometry('880x300')
 
 def translate_it():
-    # delete any previous translation
     translated_text.delete(1.0, END)
-
     try:
-        # get the languages from dictionary keys
-        for key, value in languages.items():
-            if (value == original_combo.get()):
-                from_language_key = key
+        from_lang = original_combo.get()
+        to_lang = translated_combo.get()
+        input_text = original_text.get(1.0, END).strip()
         
-        for key, value in languages.items():
-            if (value == translated_combo.get()):
-                to_language_key = key
-
-        # turn original text into a textblob
-        words = textblob.TextBlob(original_text.get(1.0, END))
-
-        # translate text
-        words = words.translate(from_lang = from_language_key, to = to_language_key)
-
-        # output translated text to screen
-        translated_text.insert(1.0, words)
-
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(input_text)
+        
+        translated_text.insert(1.0, translation)
     except Exception as e:
-        messagebox.showerror("Translator", e)
+        messagebox.showerror("Translator", f"Translation failed. Error: {e}")
+
 
 def clear():
     # clear the text boxes
@@ -44,6 +33,8 @@ languages = googletrans.LANGUAGES
 
 # convert the languages dictionary to a list with values only
 language_list = list(languages.values())
+
+translator = googletrans.Translator(service_urls=['translate.googleapis.com'])
 
 # text boxes
 original_text = Text(root, height=10, width=40, font=("Arial", 11))

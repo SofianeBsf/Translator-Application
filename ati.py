@@ -12,7 +12,10 @@ def translate():
     pass
 
 def clear():
-    pass
+    # clear the text boxes
+    original_text.delete(1.0, END)
+    translated_text.delete(1.0, END)
+
 
 # text boxes
 original_text = Text(root, height=10, width=40)

@@ -19,6 +19,7 @@ def clear():
 # grab languages list from googletrans
 languages = googletrans.LANGUAGES
 
+# convert the languages dictionnary to a list with values only
 language_list = list(languages.values())
 
 # text boxes

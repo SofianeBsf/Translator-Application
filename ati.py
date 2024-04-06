@@ -8,7 +8,7 @@ root.title('Translator')
 # root.iconbitmap('#')
 root.geometry('880x300')
 
-def translate():
+def translate_it():
     try:
         # get the languages from dictionary keys
         for key, value in languages.items():
@@ -21,6 +21,9 @@ def translate():
 
         # turn original text into a textblob
         words = textblob.TextBlob(original_text.get(1.0, END))
+
+        # translate text
+        words = words.translate(from_lang = from_language_key, to = to_language_key)
 
     except Exception as e:
         messagebox.showerror("Translator", e)
@@ -40,7 +43,7 @@ language_list = list(languages.values())
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)
 
-translate_button = Button(root, text="TRANSLATE!", font=("Arial", 24), command=translate)
+translate_button = Button(root, text="TRANSLATE!", font=("Arial", 24), command=translate_it)
 translate_button.grid(row=0, column=1, padx=10)
 
 translated_text = Text(root, height=10, width=40, font=("Arial", 11))

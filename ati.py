@@ -11,7 +11,7 @@ root.title('Translator')  # Set the title of the window
 root.geometry('880x300')  # Set the initial size of the window
 
 # Define a colorful theme
-root.configure(bg="#2C3E50")  # Set background color of the main window
+root.configure(bg="#88BEFF")  # Set background color of the main window
 
 # Function to set style for all widgets
 def set_style():
@@ -29,7 +29,7 @@ def set_style():
 # Call the function to set style
 set_style()
 
-# Define function to perform translation
+# Define function to perform translation for the TRANSLATE button
 def translate_it():
     translated_text.delete(1.0, END)  # Clear the translated text box
     try:
@@ -80,7 +80,7 @@ original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)
 
 # Create the translate button
-translate_button = Button(root, text="TRANSLATE!", font=("Arial", 24), command=translate_it)
+translate_button = Button(root, text="TRANSLATE", font=("Arial", 24), command=translate_it)
 translate_button.grid(row=0, column=1, padx=10)
 
 # Create the translated text output box

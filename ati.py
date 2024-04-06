@@ -1,6 +1,7 @@
 from tkinter import *
 import googletrans
 from tkinter import ttk, messagebox
+import textblob
 
 root = Tk()
 root.title('Translator')
@@ -11,10 +12,10 @@ def translate_it():
     try:
         from_lang = original_combo.get()
         to_lang = translated_combo.get()
-        input_text = original_text.get(1.0, END).strip()
+        input_text = textblob.TextBlob(original_text.get(1.0, END).strip())
         
         translator = googletrans.Translator()
-        translation = translator.translate(input_text, src=from_lang, dest=to_lang)
+        translation = translator.translate(str(input_text), src=from_lang, dest=to_lang)
         
         translated_text.insert(1.0, translation.text)
     except Exception as e:

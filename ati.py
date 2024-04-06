@@ -2,6 +2,7 @@ from tkinter import *
 import googletrans
 from tkinter import ttk, messagebox
 import textblob
+import pyttsx3
 
 root = Tk()
 root.title('Translator')

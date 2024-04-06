@@ -60,11 +60,11 @@ def translate_it():
 
 # Define function to clear text boxes
 def clear():
-    # Clear both the original and translated text boxes
+    # Clear both the original and translated text boxes for the CLEAR button
     original_text.delete(1.0, END)
     translated_text.delete(1.0, END)
 
-# Function to switch between original and translated languages
+# Function to switch between original and translated languages for the SWITCH button
 def switch_languages():
     original_lang = original_combo.get()
     translated_lang = translated_combo.get()

@@ -9,6 +9,9 @@ root.title('Translator')
 root.geometry('880x300')
 
 def translate_it():
+    # delete any previous translation
+    translated_text.delete(1.0, END)
+
     try:
         # get the languages from dictionary keys
         for key, value in languages.items():
@@ -24,6 +27,9 @@ def translate_it():
 
         # translate text
         words = words.translate(from_lang = from_language_key, to = to_language_key)
+
+        # output translated text to screen
+        translated_text.insert(1.0, words)
 
     except Exception as e:
         messagebox.showerror("Translator", e)

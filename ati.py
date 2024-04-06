@@ -30,7 +30,7 @@ def translate_it():
         engine = pyttsx3.init()
 
         # Pass text to speech engin
-        engine.say(translation)
+        engine.say(translated_text.get(1.0, END))
 
         # Run the engine
         engine.runAndWait()

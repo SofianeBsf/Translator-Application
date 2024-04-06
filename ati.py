@@ -9,7 +9,21 @@ root.title('Translator')
 root.geometry('880x300')
 
 def translate():
-    pass
+    try:
+        # get the languages from dictionary keys
+        for key, value in languages.items():
+            if (value == original_combo.get()):
+                from_language_key = key
+        
+        for key, value in languages.items():
+            if (value == translated_combo.get()):
+                to_language_key = key
+
+        # turn original text into a textblob
+        words = textblob.TextBlob(original_text.get(1.0, END))
+
+    except Exception as e:
+        messagebox.showerror("Translator", e)
 
 def clear():
     # clear the text boxes
@@ -19,7 +33,7 @@ def clear():
 # grab languages list from googletrans
 languages = googletrans.LANGUAGES
 
-# convert the languages dictionnary to a list with values only
+# convert the languages dictionary to a list with values only
 language_list = list(languages.values())
 
 # text boxes

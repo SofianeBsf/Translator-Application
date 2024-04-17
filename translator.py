@@ -49,6 +49,7 @@ set_style()
 def translate_it():
     translated_text.config(state='normal')  # Enable the text widget for insertion
     translated_text.delete(1.0, END)  # Clear the translated text box
+    
     try:
         from_lang = original_combo.get()  # Get the selected original language
         to_lang = translated_combo.get()  # Get the selected target language

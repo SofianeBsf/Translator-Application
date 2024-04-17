@@ -20,10 +20,19 @@ This is a simple GUI application built using Python's Tkinter library for transl
 Clone the repository to your local machine.
 Ensure you have Python installed.
 
-Install the required dependencies using pip:
+Install the required dependencies using [pip](https://pip.pypa.io/en/stable/):
 
 ```bash
+pip install tkinter
+```
+```bash
 pip install googletrans==4.0.0-rc1 textblob pyttsx3
+```
+```bash
+pip install textblob
+```
+```bash
+pip install pyttsx3
 ```
 
 Run the translator.py script:

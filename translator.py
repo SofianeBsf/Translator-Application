@@ -102,7 +102,6 @@ def switch_languages():
     # Set the value of the translated combo box to the currently selected original language
     translated_combo.set(original_lang)
 
-
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)

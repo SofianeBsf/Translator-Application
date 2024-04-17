@@ -26,7 +26,7 @@ Install the required dependencies using [pip](https://pip.pypa.io/en/stable/):
 pip install tkinter
 ```
 ```bash
-pip install googletrans==4.0.0-rc1 textblob pyttsx3
+pip install googletrans==4.0.0-rc1
 ```
 ```bash
 pip install textblob

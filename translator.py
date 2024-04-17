@@ -87,7 +87,9 @@ def translate_it():
 def clear():
     # Clear both the original and translated text boxes for the CLEAR button
     original_text.delete(1.0, END)
-    translated_text.delete(1.0, END)
+    translated_text.config(state='normal')  # Enable the text widget for insertion
+    translated_text.delete(1.0, END)  # Clear the translated text box
+    translated_text.config(state='disabled')  # Disable the text widget after insertion
 
 # Function to switch between original and translated languages for the SWITCH button
 def switch_languages():

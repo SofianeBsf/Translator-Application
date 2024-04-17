@@ -93,10 +93,15 @@ def clear():
 
 # Function to switch between original and translated languages for the SWITCH button
 def switch_languages():
+    # Get the currently selected original language from the original combo box
     original_lang = original_combo.get()
+    # Get the currently selected target language from the translated combo box
     translated_lang = translated_combo.get()
+    # Set the value of the original combo box to the currently selected target language
     original_combo.set(translated_lang)
+    # Set the value of the translated combo box to the currently selected original language
     translated_combo.set(original_lang)
+
 
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))

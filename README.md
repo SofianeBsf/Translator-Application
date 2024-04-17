@@ -11,10 +11,10 @@ This is a simple GUI application built using Python's Tkinter library for transl
 5. Colorful and intuitive user interface.
 
 ## Dependencies
-'tkinter': Python's standard GUI library.
-'googletrans': A Python wrapper for Google Translate API.
-'textblob': A library for processing textual data.
-'pyttsx3': A text-to-speech conversion library.
+1. 'tkinter': Python's standard GUI library.
+2. 'googletrans': A Python wrapper for Google Translate API.
+3. 'textblob': A library for processing textual data.
+4. 'pyttsx3': A text-to-speech conversion library.
 
 ## How to Use
 Clone the repository to your local machine.

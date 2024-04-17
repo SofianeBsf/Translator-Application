@@ -101,7 +101,7 @@ translate_button = Button(root, text="TRANSLATE", font=("Arial", 24), command=tr
 translate_button.grid(row=0, column=1, padx=10)
 
 # Create the translated text output box
-translated_text = Text(root, height=10, width=40, font=("Arial", 11))
+translated_text = Text(root, height=10, width=40, font=("Arial", 11), state='disabled')
 translated_text.grid(row=0, column=2, padx=10, pady=20)
 
 # Create the combo boxes for selecting languages

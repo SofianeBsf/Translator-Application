@@ -19,7 +19,7 @@ This is a simple GUI application built using Python's Tkinter library for transl
 3. [textblob](https://textblob.readthedocs.io/en/dev/): A library for processing textual data.
 4. [pyttsx3](https://pypi.org/project/pyttsx3/): A text-to-speech conversion library.
 
-## How to Use
+## Installation
 Clone the repository to your local machine.
 Ensure you have Python installed.
 
@@ -44,6 +44,7 @@ Run the translator.py script:
 python translator.py
 ```
 
+## Usage
 1. Enter the text you want to translate in the left text box.
 2. Select the original and target languages from the dropdown menus.
 3. Click on the "Translate" button to translate the text.
@@ -53,6 +54,16 @@ python translator.py
 ## Note
 Ensure you have a stable internet connection as the translation functionality relies on Google Translate API.
 The speech synthesis feature may not work properly in all environments and may require additional setup.
+
+## Troubleshooting
+If you encounter any issues while using the application, here are some common troubleshooting steps:
+
+* Check your internet connection to ensure it's stable.
+* Ensure that you have installed all dependencies correctly.
+* If the speech synthesis feature doesn't work, check the configuration of your audio output device.
+
+## Contributing
+Contributions are welcome! If you'd like to contribute to the project, feel free to submit bug reports, feature requests, or pull requests through GitHub.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.

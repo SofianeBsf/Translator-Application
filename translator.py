@@ -47,6 +47,7 @@ set_style()
 
 # Define function to perform translation for the TRANSLATE button
 def translate_it():
+    translated_text.config(state='normal')  # Enable the text widget for insertion
     translated_text.delete(1.0, END)  # Clear the translated text box
     try:
         from_lang = original_combo.get()  # Get the selected original language
@@ -78,6 +79,9 @@ def translate_it():
     except Exception as e:
         # Display an error message if translation fails
         messagebox.showerror("Translator", f"Translation failed. Error: {e}")
+
+    finally:
+        translated_text.config(state='disabled')  # Disable the text widget after insertion
 
 # Define function to clear text boxes
 def clear():

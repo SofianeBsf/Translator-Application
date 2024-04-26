@@ -1,7 +1,7 @@
 # Translator Application
 
 ## Introduction
-Welcome to the Translator Application README! This project aims to provide users with a simple yet powerful tool for translating text between different languages using Python's Tkinter library. With features like speech synthesis and intuitive UI, this application offers a seamless translation experience.
+Welcome to the Translator Application README of Sofiane Boussouf with P number P434602 in the module of Intro To Programming IY499! This project aims to provide users with a simple yet powerful tool for translating text between different languages using Python's Tkinter library. With features like speech synthesis and intuitive UI, this application offers a seamless translation experience.
 
 ## Overview
 This is a simple GUI application built using Python's Tkinter library for translating text between different languages. The application utilizes Google Translate API through the googletrans library and TextBlob for text manipulation. It also incorporates speech synthesis feature using pyttsx3 for reading out the translated text.

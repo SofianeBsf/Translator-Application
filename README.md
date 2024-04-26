@@ -8,6 +8,7 @@ Welcome to the Translator Application README of Sofiane Boussouf with P number P
 
 ## Overview
 This is a simple GUI application built using Python's Tkinter library for translating text between different languages. The application utilizes Google Translate API through the googletrans library and TextBlob for text manipulation. It also incorporates speech synthesis feature using pyttsx3 for reading out the translated text.
+This application enables users to input text in one language, select a target language, and translate the text instantly. With intuitive controls, users can choose from a wide range of supported languages for both input and output. The translated text is displayed in real-time, facilitating effective communication across language barriers.
 
 ## Features
 1. Translate text from one language to another.
@@ -15,6 +16,8 @@ This is a simple GUI application built using Python's Tkinter library for transl
 3. Ability to switch between original and target languages.
 4. Clear functionality to erase input and output text.
 5. Colorful and intuitive user interface.
+6. Error handling for seamless user experience
+7. Support for a vast array of languages
 
 ## Dependencies
 1. [tkinter](https://docs.python.org/3/library/tkinter.html): Python's standard GUI library.

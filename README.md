@@ -1,5 +1,9 @@
 # Translator Application
 
+## Declaration of own work
+I confirm that this assignment is my own work.
+Where I have referred to academic sources, I have provided in-text citations and included the sources in the final reference list.
+
 ## Introduction
 Welcome to the Translator Application README of Sofiane Boussouf with P number P434602 in the module of Intro To Programming IY499! This project aims to provide users with a simple yet powerful tool for translating text between different languages using Python's Tkinter library. With features like speech synthesis and intuitive UI, this application offers a seamless translation experience.
 

@@ -185,6 +185,19 @@ def edit_favorite():
                 for line in lines:
                     favorites_listbox.insert(END, line.strip())
 
+    # Function to handle the deletion of a selected favorite translation
+    def on_delete():
+        # Getting the index of the selected item in the listbox
+        selected_index = favorites_listbox.curselection()
+        if selected_index:
+            # Getting the selected item and splitting it into original and translated parts
+            selected_item = favorites_listbox.get(selected_index)
+            original, translated = selected_item.split(" : ")
+            # Calling the delete_from_favorites function to remove the selected translation from "favorites.txt"
+            delete_from_favorites(original, translated)
+            # Deleting the selected item from the listbox
+            favorites_listbox.delete(selected_index)
+
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)

@@ -135,6 +135,27 @@ def delete_from_favorites(original, translated):
         # Showing an information messagebox confirming successful deletion
         messagebox.showinfo("Translator", "Translation deleted from favorites.")
 
+# Function to load and edit favorite translation
+def edit_favorite():
+    # Creating a new window to display favorites
+    favorites_window = Toplevel(root)
+    favorites_window.title("Edit Favorites")
+    favorites_window.geometry("400x300")
+
+    # Adding a scrollbar to navigate through the list of favorites
+    scroll = Scrollbar(favorites_window)
+    scroll.pack(side=RIGHT, fill=Y)
+
+    # Creating a listbox to display the favorites
+    favorites_listbox = Listbox(favorites_window, yscrollcommand=scroll.set)
+    favorites_listbox.pack(fill=BOTH, expand=1)
+
+    # Reading all lines from "favorites.txt" and populating the listbox with them
+    with open("favorites.txt", "r") as file:
+        lines = file.readlines()
+    for line in lines:
+        favorites_listbox.insert(END, line.strip())
+
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)

@@ -1,7 +1,7 @@
 # Import necessary modules
 from tkinter import *  # Import everything from the tkinter module
 import googletrans  # Import the googletrans module
-from tkinter import ttk, messagebox  # Import specific components from tkinter
+from tkinter import ttk, messagebox, simpledialog  # Import specific components from tkinter
 import textblob  # Import the textblob module
 import pyttsx3  # Import the pyttsx3 module
 
@@ -155,6 +155,35 @@ def edit_favorite():
         lines = file.readlines()
     for line in lines:
         favorites_listbox.insert(END, line.strip())
+
+    # Function to handle the editing of a selected favorite translation
+    def on_edit():
+        # Getting the index of the selected item in the listbox
+        selected_index = favorites_listbox.curselection()
+        if selected_index:
+            # Getting the selected item and splitting it into original and translated parts
+            selected_item = favorites_listbox.get(selected_index)
+            original, translated = selected_item.split(" : ")
+            # Asking the user for a new translation
+            new_translation = simpledialog.askstring("Edit Translation", "Enter the new translation:", initialvalue=translated)
+            if new_translation:
+                # Updating the selected translation with the new one in "favorites.txt"
+                with open("favorites.txt", "r") as file:
+                    lines = file.readlines()
+                with open("favorites.txt", "w") as file:
+                    for line in lines:
+                        if line.strip() == selected_item.strip():
+                            file.write(f"{original} : {new_translation}\n")
+                        else:
+                            file.write(line)
+                # Showing an information messagebox confirming successful editing
+                messagebox.showinfo("Translator", "Translation edited in favorites.")
+                # Clearing and repopulating the listbox with updated favorites
+                favorites_listbox.delete(0, END)
+                with open("favorites.txt", "r") as file:
+                    lines = file.readlines()
+                for line in lines:
+                    favorites_listbox.insert(END, line.strip())
 
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))

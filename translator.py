@@ -1,24 +1,23 @@
 # Import necessary modules
-from tkinter import *  # Import everything from the tkinter module
-import googletrans  # Import the googletrans module
-from tkinter import ttk, messagebox, simpledialog  # Import specific components from tkinter
-import textblob  # Import the textblob module
-import pyttsx3  # Import the pyttsx3 module
+import tkinter as tk
+from tkinter import ttk, messagebox, simpledialog
+import googletrans
+from textblob import TextBlob
+import pyttsx3
 
 # Create the main window
-root = Tk()
+root = tk.Tk()
 root.title('Translator')  # Set the title of the window
-root.geometry('880x300')  # Set the initial size of the window
+root.geometry('880x500')  # Set the initial size of the window
 
 # Define a colorful theme
-root.configure(bg="#88BEFF")  # Set background color of the main window
+root.configure(bg="#F5F5F5")  # Set background color of the main window
 
 # Get the list of languages available for translation
 languages = googletrans.LANGUAGES
 language_list = list(languages.values())
 
 # Creating a function to sort the languages list alphabetically
-# I used here a bubble sorting
 def languages_list_sorting(lst):
     n = len(lst)
     for i in range(n - 1):
@@ -31,29 +30,26 @@ def set_style():
     style = ttk.Style()
 
     # Configure buttons
-    style.configure('TButton', foreground='#0000', background='#3498db', font=('Arial', 12), padding=10)
+    style.configure('TButton', foreground='#000000', background='#4CAF50', font=('Arial', 12), padding=10)
 
     # Configure combo boxes
-    style.configure('TCombobox', foreground='#0000', background='#34495e', font=('Arial', 11), fieldbackground='#34495e')
+    style.configure('TCombobox', foreground='#000000', background='#E0E0E0', font=('Arial', 11), fieldbackground='#E0E0E0')
 
     # Configure text widgets
-    style.configure('TText', foreground='#0000', background='#34495e', font=('Arial', 11))
-
-    # Sort languages alphabetically for combo boxes
-    languages_list_sorting(language_list)
+    style.configure('TText', foreground='#000000', background='#E0E0E0', font=('Arial', 11))
 
 # Call the function to set style
 set_style()
 
-# Define function to perform translation for the TRANSLATE button
+# Function to perform translation for the TRANSLATE button
 def translate_it():
     translated_text.config(state='normal')  # Enable the text widget for insertion
-    translated_text.delete(1.0, END)  # Clear the translated text box
+    translated_text.delete(1.0, tk.END)  # Clear the translated text box
     
     try:
         from_lang = original_combo.get()  # Get the selected original language
         to_lang = translated_combo.get()  # Get the selected target language
-        input_text = textblob.TextBlob(original_text.get(1.0, END).strip())  # Get the input text
+        input_text = original_text.get(1.0, tk.END).strip()  # Get the input text
         
         # Ensure input text is not empty
         if not input_text:
@@ -63,7 +59,7 @@ def translate_it():
         # Create a translator object
         translator = googletrans.Translator()
         # Translate the input text from the original language to the target language
-        translation = translator.translate(str(input_text), src=from_lang, dest=to_lang)
+        translation = translator.translate(input_text, src=from_lang, dest=to_lang)
         
         # Insert the translated text into the text box
         translated_text.insert(1.0, translation.text)
@@ -72,7 +68,7 @@ def translate_it():
         engine = pyttsx3.init()
 
         # Pass text to speech engin
-        engine.say(translated_text.get(1.0, END))
+        engine.say(translated_text.get(1.0, tk.END))
 
         # Run the engine
         engine.runAndWait()
@@ -87,12 +83,12 @@ def translate_it():
 # Define function to clear text boxes
 def clear():
     # Clear both the original and translated text boxes for the CLEAR button
-    original_text.delete(1.0, END)
+    original_text.delete(1.0, tk.END)
     translated_text.config(state='normal')  # Enable the text widget for insertion
-    translated_text.delete(1.0, END)  # Clear the translated text box
+    translated_text.delete(1.0, tk.END)  # Clear the translated text box
     translated_text.config(state='disabled')  # Disable the text widget after insertion
 
-# Function to switch between original and translated languages for the SWITCH button
+# Function toswitch between original and translated languages for the SWITCH button
 def switch_languages():
     # Get the currently selected original language from the original combo box
     original_lang = original_combo.get()
@@ -106,17 +102,23 @@ def switch_languages():
 # Function to save translated text to favorites
 def add_to_favorites():
     # Getting the original and translated text from their respective Text widgets, removing leading/trailing whitespace
-    original = original_text.get(1.0, END).strip()
-    translated = translated_text.get(1.0, END).strip()
+    original = original_text.get(1.0, tk.END).strip()
+    translated = translated_text.get(1.0, tk.END).strip()
     # Checking if both original and translated text exist
     if original and translated:
-        # Appending the translation to the "favorites.txt" file
-        with open("favorites.txt", "a") as file:
-            file.write(f"{original} : {translated}\n")
-        # Showing an information messagebox confirming successful addition
-        messagebox.showinfo("Translator", "Translation added to favorites.")
+        # Check if the translation already exists in favorites
+        with open("favorites.txt", "r") as file:
+            if any(f"{original} : {translated}" in line for line in file):
+                # Translation already exists in favorites
+                messagebox.showinfo("Translator", "Translation already added to favorites.")
+            else:
+                # Append the translation to the "favorites.txt" file
+                with open("favorites.txt", "a") as file:
+                    file.write(f"{original} : {translated}\n")
+                # Show an information messagebox confirming successful addition
+                messagebox.showinfo("Translator", "Translation added to favorites.")
     else:
-        # Showing a warning messagebox if either original or translated text is missing
+        # Show a warning messagebox if either original or translated text is missing
         messagebox.showwarning("Translator", "Please perform a translation first.")
 
 # Function to delete translation from favorites
@@ -138,23 +140,23 @@ def delete_from_favorites(original, translated):
 # Function to load and edit favorite translation
 def edit_favorite():
     # Creating a new window to display favorites
-    favorites_window = Toplevel(root)
+    favorites_window = tk.Toplevel(root)
     favorites_window.title("Edit Favorites")
     favorites_window.geometry("400x300")
 
     # Adding a scrollbar to navigate through the list of favorites
-    scroll = Scrollbar(favorites_window)
-    scroll.pack(side=RIGHT, fill=Y)
+    scroll = tk.Scrollbar(favorites_window)
+    scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Creating a listbox to display the favorites
-    favorites_listbox = Listbox(favorites_window, yscrollcommand=scroll.set)
-    favorites_listbox.pack(fill=BOTH, expand=1)
+    favorites_listbox = tk.Listbox(favorites_window, yscrollcommand=scroll.set)
+    favorites_listbox.pack(fill=tk.BOTH, expand=1)
 
     # Reading all lines from "favorites.txt" and populating the listbox with them
     with open("favorites.txt", "r") as file:
         lines = file.readlines()
     for line in lines:
-        favorites_listbox.insert(END, line.strip())
+        favorites_listbox.insert(tk.END, line.strip())
 
     # Function to handle the editing of a selected favorite translation
     def on_edit():
@@ -168,7 +170,7 @@ def edit_favorite():
             new_translation = simpledialog.askstring("Edit Translation", "Enter the new translation:", initialvalue=translated)
             if new_translation:
                 # Updating the selected translation with the new one in "favorites.txt"
-                with open("favorites.txt", "r") as file:
+                with open("favorites.txt","r") as file:
                     lines = file.readlines()
                 with open("favorites.txt", "w") as file:
                     for line in lines:
@@ -179,11 +181,11 @@ def edit_favorite():
                 # Showing an information messagebox confirming successful editing
                 messagebox.showinfo("Translator", "Translation edited in favorites.")
                 # Clearing and repopulating the listbox with updated favorites
-                favorites_listbox.delete(0, END)
+                favorites_listbox.delete(0, tk.END)
                 with open("favorites.txt", "r") as file:
                     lines = file.readlines()
                 for line in lines:
-                    favorites_listbox.insert(END, line.strip())
+                    favorites_listbox.insert(tk.END, line.strip())
 
     # Function to handle the deletion of a selected favorite translation
     def on_delete():
@@ -199,52 +201,29 @@ def edit_favorite():
             favorites_listbox.delete(selected_index)
 
     # Button to trigger the edit function
-    edit_button = Button(favorites_window, text="Edit", command=on_edit)
-    edit_button.pack(side=LEFT, padx=5, pady=5)
+    edit_button = tk.Button(favorites_window, text="Edit", command=on_edit)
+    edit_button.pack(side=tk.LEFT, padx=5, pady=5)
 
     # Button to trigger the delete function
-    delete_button = Button(favorites_window, text="Delete", command=on_delete)
-    delete_button.pack(side=LEFT, padx=5, pady=5)
+    delete_button = tk.Button(favorites_window, text="Delete", command=on_delete)
+    delete_button.pack(side=tk.LEFT, padx=5, pady=5)
 
     # Configuring the scrollbar to work with the listbox
     scroll.config(command=favorites_listbox.yview)
 
-# Creating a class for placeholders
-class PlaceholderText(Text):
-    def __init__(self, master=None, placeholder="", *args, **kwargs):
-        super().__init__(master, *args, **kwargs)
-        self.placeholder = placeholder
-        self.placeholder_color = '#888888'
-        self.default_fg_color = self['foreground']
-
-        self.bind("<FocusIn>", self.on_focus_in)
-        self.bind("<FocusOut>", self.on_focus_out)
-
-        self.set_placeholder()
-
-    def on_focus_in(self, event):
-        if self.get("1.0", "end-1c") == self.placeholder:
-            self.delete("1.0", "end")
-            self.config(fg=self.default_fg_color)
-
-    def on_focus_out(self, event):
-        if not self.get("1.0", "end-1c"):
-            self.set_placeholder()
-
-    def set_placeholder(self):
-        self.insert("1.0", self.placeholder)
-        self.config(fg=self.placeholder_color)
-
 # Create the original text input box
-original_text = PlaceholderText(root, height=10, width=40, font=("Arial", 12, "bold"), placeholder="Enter text here...")
+original_text = tk.Text(root, height=10, width=40, font=("Arial", 12, "bold"))
 original_text.grid(row=0, column=0, padx=10, pady=20)
 
+# Color the border of the text input field
+original_text.config(highlightbackground="#4CAF50", highlightthickness=2)
+
 # Create the translate button
-translate_button = Button(root, text="TRANSLATE", font=("Arial", 24), command=translate_it)
+translate_button = ttk.Button(root, text="TRANSLATE", command=translate_it)
 translate_button.grid(row=0, column=1, padx=10)
 
 # Create the translated text output box
-translated_text = Text(root, height=10, width=40, font=("Arial", 12, "bold"), state='disabled')
+translated_text = tk.Text(root, height=10, width=40, font=("Arial", 12, "bold"), state='disabled')
 translated_text.grid(row=0, column=2, padx=10, pady=20)
 
 # Create the combo boxes for selecting languages
@@ -257,19 +236,19 @@ translated_combo.current(26)  # Set the default selection for target language 'f
 translated_combo.grid(row=1, column=2)
 
 # Create a switch button
-switch_button = Button(root, text="SWITCH", command=switch_languages)
+switch_button = ttk.Button(root, text="SWITCH", command=switch_languages)
 switch_button.grid(row=1, column=1, pady=5)
 
 # Create the clear button
-clear_button = Button(root, text="CLEAR", command=clear)
+clear_button = ttk.Button(root, text="CLEAR", command=clear)
 clear_button.grid(row=2, column=1, pady=5)
 
 # Create the add to favorites button
-add_to_favorites_button = Button(root, text="Add to Favorites", command=add_to_favorites)
+add_to_favorites_button = ttk.Button(root, text="Add to Favorites", command=add_to_favorites)
 add_to_favorites_button.grid(row=2, column=0, padx=5)
 
 # Create the edit favorites button
-edit_favorites_button = Button(root, text="Edit Favorites", command=edit_favorite)
+edit_favorites_button = ttk.Button(root, text="Edit Favorites", command=edit_favorite)
 edit_favorites_button.grid(row=2, column=2, padx=5)
 
 # Start the Tkinter event loop

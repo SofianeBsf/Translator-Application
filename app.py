@@ -1,7 +1,7 @@
 # Import necessary modules
 from tkinter import *  # Import everything from the tkinter module
 import googletrans  # Import the googletrans module
-from tkinter import ttk, messagebox  # Import specific components from tkinter
+from tkinter import ttk, messagebox, filedialog, simpledialog  # Import specific components from tkinter
 import textblob  # Import the textblob module
 import pyttsx3  # Import the pyttsx3 module
 
@@ -45,7 +45,7 @@ def set_style():
 # Call the function to set style
 set_style()
 
-# Define function to perform translation for the TRANSLATE button
+# Function to perform translation for the TRANSLATE button
 def translate_it():
     translated_text.config(state='normal')  # Enable the text widget for insertion
     translated_text.delete(1.0, END)  # Clear the translated text box
@@ -71,7 +71,7 @@ def translate_it():
         # Initialize the speech engine
         engine = pyttsx3.init()
 
-        # Pass text to speech engin
+        # Pass text to speech engine
         engine.say(translated_text.get(1.0, END))
 
         # Run the engine
@@ -84,7 +84,7 @@ def translate_it():
     finally:
         translated_text.config(state='disabled')  # Disable the text widget after insertion
 
-# Define function to clear text boxes
+# Function to clear text boxes
 def clear():
     # Clear both the original and translated text boxes for the CLEAR button
     original_text.delete(1.0, END)
@@ -119,6 +119,96 @@ def add_to_favorites():
         # Showing a warning messagebox if either original or translated text is missing
         messagebox.showwarning("Translator", "Please perform a translation first.")
 
+# Function to delete translation from favorites
+def delete_from_favorites(original, translated):
+    # Asking for confirmation before deletion
+    deletion_confirmation = messagebox.askyesno("Delete from Favorites", "Are you sure you want to delete this translation from favorites?")
+    if deletion_confirmation:
+        # Reading all lines from "favorites.txt"
+        with open("favorites.txt", "r") as file:
+            lines = file.readlines()
+        # Writing all lines back to "favorites.txt" except the one to be deleted
+        with open("favorites.txt", "w") as file:
+            for line in lines:
+                if f"{original} : {translated}" not in line:
+                    file.write(line)
+        # Showing an information messagebox confirming successful deletion
+        messagebox.showinfo("Translator", "Translation deleted from favorites.")
+
+# Function to load and edit favorite translation
+def edit_favorite():
+    # Creating a new window to display favorites
+    favorites_window = Toplevel(root)
+    favorites_window.title("Edit Favorites")
+    favorites_window.geometry("400x300")
+
+    # Adding a scrollbar to navigate through the list of favorites
+    scroll = Scrollbar(favorites_window)
+    scroll.pack(side=RIGHT, fill=Y)
+
+    # Creating a listbox to display the favorites
+    favorites_listbox = Listbox(favorites_window, yscrollcommand=scroll.set)
+    favorites_listbox.pack(fill=BOTH, expand=1)
+
+    # Reading all lines from "favorites.txt" and populating the listbox with them
+    with open("favorites.txt", "r") as file:
+        lines = file.readlines()
+    for line in lines:
+        favorites_listbox.insert(END, line.strip())
+
+    # Function to handle the editing of a selected favorite translation
+    def on_edit():
+        # Getting the index of the selected item in the listbox
+        selected_index = favorites_listbox.curselection()
+        if selected_index:
+            # Getting the selected item and splitting it into original and translated parts
+            selected_item = favorites_listbox.get(selected_index)
+            original, translated = selected_item.split(" : ")
+            # Asking the user for a new translation
+            new_translation = simpledialog.askstring("Edit Translation", "Enter the new translation:", initialvalue=translated)
+            if new_translation:
+                # Updating the selected translation with the new one in "favorites.txt"
+                with open("favorites.txt", "r") as file:
+                    lines = file.readlines()
+                with open("favorites.txt", "w") as file:
+                    for line in lines:
+                        if line.strip() == selected_item.strip():
+                            file.write(f"{original} : {new_translation}\n")
+                        else:
+                            file.write(line)
+                # Showing an information messagebox confirming successful editing
+                messagebox.showinfo("Translator", "Translation edited in favorites.")
+                # Clearing and repopulating the listbox with updated favorites
+                favorites_listbox.delete(0, END)
+                with open("favorites.txt", "r") as file:
+                    lines = file.readlines()
+                for line in lines:
+                    favorites_listbox.insert(END, line.strip())
+
+    # Function to handle the deletion of a selected favorite translation
+    def on_delete():
+        # Getting the index of the selected item in the listbox
+        selected_index = favorites_listbox.curselection()
+        if selected_index:
+            # Getting the selected item and splitting it into original and translated parts
+            selected_item = favorites_listbox.get(selected_index)
+            original, translated = selected_item.split(" : ")
+            # Calling the delete_from_favorites function to remove the selected translation from "favorites.txt"
+            delete_from_favorites(original, translated)
+            # Deleting the selected item from the listbox
+            favorites_listbox.delete(selected_index)
+
+    # Button to trigger the edit function
+    edit_button = Button(favorites_window, text="Edit", command=on_edit)
+    edit_button.pack(side=LEFT, padx=5, pady=5)
+
+    # Button to trigger the delete function
+    delete_button = Button(favorites_window, text="Delete", command=on_delete)
+    delete_button.pack(side=LEFT, padx=5, pady=5)
+
+    # Configuring the scrollbar to work with the listbox
+    scroll.config(command=favorites_listbox.yview)
+
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)
@@ -147,6 +237,14 @@ switch_button.grid(row=1, column=1, pady=5)
 # Create the clear button
 clear_button = Button(root, text="CLEAR", command=clear)
 clear_button.grid(row=2, column=1, pady=5)
+
+# Create the add to favorites button
+add_to_favorites_button = Button(root, text="Add to Favorites", command=add_to_favorites)
+add_to_favorites_button.grid(row=2, column=0, padx=5)
+
+# Create the edit favorites button
+edit_favorites_button = Button(root, text="Edit Favorites", command=edit_favorite)
+edit_favorites_button.grid(row=2, column=2, padx=5)
 
 # Start the Tkinter event loop
 root.mainloop()

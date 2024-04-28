@@ -119,6 +119,22 @@ def add_to_favorites():
         # Showing a warning messagebox if either original or translated text is missing
         messagebox.showwarning("Translator", "Please perform a translation first.")
 
+# Function to delete translation from favorites
+def delete_from_favorites(original, translated):
+    # Asking for confirmation before deletion
+    deletion_confirmation = messagebox.askyesno("Delete from Favorites", "Are you sure you want to delete this translation from favorites?")
+    if deletion_confirmation:
+        # Reading all lines from "favorites.txt"
+        with open("favorites.txt", "r") as file:
+            lines = file.readlines()
+        # Writing all lines back to "favorites.txt" except the one to be deleted
+        with open("favorites.txt", "w") as file:
+            for line in lines:
+                if f"{original} : {translated}" not in line:
+                    file.write(line)
+        # Showing an information messagebox confirming successful deletion
+        messagebox.showinfo("Translator", "Translation deleted from favorites.")
+
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)

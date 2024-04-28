@@ -1,6 +1,6 @@
 # Translator Application
 
-<img src="/translator.pnr">
+<img src="/translator.png">
 
 ## Student informations
 * Name : Sofiane Boussouf

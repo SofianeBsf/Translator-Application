@@ -198,6 +198,17 @@ def edit_favorite():
             # Deleting the selected item from the listbox
             favorites_listbox.delete(selected_index)
 
+    # Button to trigger the edit function
+    edit_button = Button(favorites_window, text="Edit", command=on_edit)
+    edit_button.pack(side=LEFT, padx=5, pady=5)
+
+    # Button to trigger the delete function
+    delete_button = Button(favorites_window, text="Delete", command=on_delete)
+    delete_button.pack(side=LEFT, padx=5, pady=5)
+
+    # Configuring the scrollbar to work with the listbox
+    scroll.config(command=favorites_listbox.yview)
+
 # Create the original text input box
 original_text = Text(root, height=10, width=40, font=("Arial", 11))
 original_text.grid(row=0, column=0, padx=10, pady=20)

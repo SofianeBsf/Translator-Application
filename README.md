@@ -7,6 +7,7 @@
 * Pnumber : P434602
 * Module name : Introduction to programming
 * Module code : IY499
+* [Link to my GitHub](https://github.com/SofianeBsf/Translator-Application.git)
 
 ## Declaration of own work
 I confirm that this assignment is my own work. Where I have referred to academic sources, I have provided in-text citations and included the sources in the final reference list.

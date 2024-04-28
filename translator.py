@@ -209,8 +209,34 @@ def edit_favorite():
     # Configuring the scrollbar to work with the listbox
     scroll.config(command=favorites_listbox.yview)
 
+# Creating a class for placeholders
+class PlaceholderText(Text):
+    def __init__(self, master=None, placeholder="", *args, **kwargs):
+        super().__init__(master, *args, **kwargs)
+        self.placeholder = placeholder
+        self.placeholder_color = '#888888'
+        self.default_fg_color = self['foreground']
+
+        self.bind("<FocusIn>", self.on_focus_in)
+        self.bind("<FocusOut>", self.on_focus_out)
+
+        self.set_placeholder()
+
+    def on_focus_in(self, event):
+        if self.get("1.0", "end-1c") == self.placeholder:
+            self.delete("1.0", "end")
+            self.config(fg=self.default_fg_color)
+
+    def on_focus_out(self, event):
+        if not self.get("1.0", "end-1c"):
+            self.set_placeholder()
+
+    def set_placeholder(self):
+        self.insert("1.0", self.placeholder)
+        self.config(fg=self.placeholder_color)
+
 # Create the original text input box
-original_text = Text(root, height=10, width=40, font=("Arial", 11))
+original_text = PlaceholderText(root, height=10, width=40, font=("Arial", 12, "bold"), placeholder="Enter text here...")
 original_text.grid(row=0, column=0, padx=10, pady=20)
 
 # Create the translate button
@@ -218,7 +244,7 @@ translate_button = Button(root, text="TRANSLATE", font=("Arial", 24), command=tr
 translate_button.grid(row=0, column=1, padx=10)
 
 # Create the translated text output box
-translated_text = Text(root, height=10, width=40, font=("Arial", 11), state='disabled')
+translated_text = Text(root, height=10, width=40, font=("Arial", 12, "bold"), state='disabled')
 translated_text.grid(row=0, column=2, padx=10, pady=20)
 
 # Create the combo boxes for selecting languages

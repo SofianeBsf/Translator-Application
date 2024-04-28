@@ -238,5 +238,13 @@ switch_button.grid(row=1, column=1, pady=5)
 clear_button = Button(root, text="CLEAR", command=clear)
 clear_button.grid(row=2, column=1, pady=5)
 
+# Create the add to favorites button
+add_to_favorites_button = Button(root, text="Add to Favorites", command=add_to_favorites)
+add_to_favorites_button.grid(row=2, column=0, padx=5)
+
+# Create the edit favorites button
+edit_favorites_button = Button(root, text="Edit Favorites", command=edit_favorite)
+edit_favorites_button.grid(row=2, column=2, padx=5)
+
 # Start the Tkinter event loop
 root.mainloop()

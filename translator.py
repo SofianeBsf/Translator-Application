@@ -2,7 +2,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import googletrans
-from textblob import TextBlob
 import pyttsx3
 
 # Create the main window
